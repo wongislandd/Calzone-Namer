@@ -1,3 +1,4 @@
+require('dotenv').config()
 const Discord = require("discord.js");
 const { strict } = require("assert");
 const client = new Discord.Client({
@@ -197,8 +198,9 @@ client.on("ready", () => {
     client.user.setActivity("Use !nickname in the reroll-nickname channel.")
 })
 
+
 /**
  * Log into the bot profile.
  */
-client.login("NzM3MTUyNjM4MTgwNzg2MjY3.Xx5M5A.BtIm3K9CcGl4j4zrfALO_ObMNVw")
+client.login(process.env.LIVE_BOT_TOKEN)
 
