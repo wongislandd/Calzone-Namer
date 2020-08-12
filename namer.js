@@ -58,14 +58,6 @@ client.on("message", (msg) => {
         return
     let args = msg.content.substring(PREFIX.length).split(" ")
     switch(args[0]) {
-        case "chance":
-            var chance = figureOutNameChance(msg.member)
-            if (chance != -1) {
-                msg.reply("```The chance of receiving " + msg.member.displayName+ " is " + chance + parsePercentageFromFloat(chance) + ".```")
-            } else {
-                msg.reply("```I couldn't find the chance for your name. This is probably because I haven't named you.```")
-            }
-            break
         case "nickname":
             try{
                 msg.reply("You have been renamed to **" + nickname(msg.member) +"**")
@@ -105,6 +97,29 @@ client.on("message", (msg) => {
             })
             msg.reply("```Renaming " + msg.guild.memberCount + " users. Please wait.```")
             break
+        case "chance":
+            var chance = figureOutNameChance(msg.member)
+            if (chance != -1) {
+                msg.reply("```The chance of receiving " + msg.member.displayName+ " is " + chance + parsePercentageFromFloat(chance) + ".```")
+            } else {
+                msg.reply("```I couldn't find the chance for your name. This is probably because I haven't named you.```")
+            }
+            break
+        case "chanceOfUser":
+            try{
+                var memberFound = msg.guild.members.cache.find((member) => member.id == args[1])
+                if(memberFound != null) {
+                    var chance = figureOutNameChance(memberFound)
+                    if (chance != -1) {
+                        msg.reply("```The chance of receiving " + memberFound.displayName+ " is " + chance + parsePercentageFromFloat(chance) + ".```")
+                    } else {
+                        msg.reply("```I couldn't find the chance for your name. This is probably because I haven't named you.```")
+                    }
+                }
+            } catch(error){
+                console.log(error)
+            }
+            break;
         case "setProbability":
             if (msg.author.id != CHRIS){
                 msg.reply("That's illegal.")
