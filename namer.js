@@ -58,6 +58,7 @@ client.on("message", (msg) => {
         return
     let args = msg.content.substring(PREFIX.length).split(" ")
     switch(args[0]) {
+        case "reroll":
         case "nickname":
             try{
                 msg.reply("You have been renamed to **" + nickname(msg.member) +"**")
@@ -157,7 +158,7 @@ client.on("message", (msg) => {
 function nickname(member){
     var newName = getASize() + " " + getANoun() + " " + getAnAdjective() + " " + getANoun()
     if (newName.length >= 32) {
-        newName = newName.substring(0,32)
+        newName = nickname(member)
     }
     try{
         member.setNickname(newName)
