@@ -1,24 +1,26 @@
 require('dotenv').config()
-const Discord = require("discord.js");
+const { Client, Intents }= require("discord.js");
 const { strict } = require("assert");
-const client = new Discord.Client({
-    partials: ["MESSAGE", "CHANNEL", "REACTION"],
+const client = new Client({
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS],
+    partials: ["MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBERS"],
 })
 
-const adjectives = ["abrupt", "acidic", "adorable", "adventurous", "aggressive", "agitated", "alert", "aloof", "amiable", "amused", "annoyed", "antsy", "anxious", "appalling", "appetizing", "apprehensive", "arrogant", "ashamed", "astonishing", "attractive", "average", "batty", "bewildered", "biting", "bitter", "bland", "blushing", "bored", "brave", "bright", "broad", "bulky", "burly", "charming", "cheeky", "cheerful", "chubby", "clean", "clear", "cloudy", "clueless", "clumsy", "colorful", "combative", "comfortable", "condemned", "condescending", "confused", "contemplative", "convincing", "convoluted", "cooperative", "corny", "costly", "courageous", "crabby", "creepy", "crooked", "cruel", "cumbersome", "curved", "cynical", "dangerous", "dashing", "decayed", "deceitful", "deep", "defeated", "defiant", "delicious", "delightful", "depraved", "depressed", "despicable", "determined", "dilapidated", "disgusted", "distinct", "distraught", "distressed", "disturbed", "dizzy", "drab", "drained", "dull", "eager", "ecstatic", "elated", "elegant", "emaciated", "embarrassed", "enchanting", "encouraging", "energetic", "enthusiastic", "envious", "exasperated", "excited", "exhilarated", "extensive", "exuberant", "fancy", "fantastic", "fierce", "filthy", "flat", "floppy", "fluttering", "foolish", "frantic", "fresh", "friendly", "frightened", "frothy", "frustrating", "funny", "fuzzy", "gaudy", "gentle", "ghastly", "giddy", "glamorous", "gleaming", "glorious", "gorgeous", "graceful", "greasy", "grieving", "gritty", "grotesque", "grubby", "grumpy", "handsome", "happy", "harebrained", "healthy", "helpful", "helpless", "high", "hollow", "homely", "horrific", "hungry", "hurt", "icy", "ideal", "impressionable", "intrigued", "irate", "irritable", "itchy", "jealous", "jittery", "jolly", "joyous", "juicy", "jumpy", "kind", "lackadaisical", "lazy", "lethal", "little", "lively", "livid", "lonely", "loose", "lovely", "lucky", "ludicrous", "macho", "magnificent", "maniacal", "melancholy", "melted", "mistaken", "misty", "moody", "mortified", "motionless", "muddy", "mysterious", "narrow", "nasty", "naughty", "nervous", "nonchalant", "nonsensical", "nutritious", "nutty", "obedient", "oblivious", "obnoxious", "odd", "old-fashioned", "outrageous", "panicky", "perplexed", "petite", "petty", "plain", "pleasant", "poised", "pompous", "precious", "prickly", "proud", "pungent", "quaint", "quizzical", "ratty", "reassured", "relieved", "repulsive", "responsive", "ripe", "robust", "rotten", "rotund", "rough", "round", "salty", "sarcastic", "scant", "scary", "scattered", "selfish", "shaggy", "shaky", "shallow", "sharp", "shiny", "silky", "silly", "skinny", "slimy", "slippery", "smarmy", "smiling", "smoggy", "smooth", "smug", "soggy", "solid", "sore", "sour", "sparkling", "spicy", "splendid", "spotless", "square", "stale", "steady", "steep", "sticky", "stormy", "stout", "straight", "strange", "strong", "stunning", "substantial", "successful", "succulent", "superficial", "superior", "swanky", "sweet", "tart", "tasty", "tender", "tense", "terrible", "testy", "thankful", "thick", "thoughtful", "thoughtless", "tight", "timely", "tricky", "trite", "troubled", "twitter", "pated", "uneven", "unsightly", "upset", "uptight", "vexed", "victorious", "virtuous", "vivacious", "vivid", "wacky", "weary", "whimsical", "whopping", "wicked", "witty", "wobbly", "wonderful", "worried", "yummy", "zany", "zealous", "zippy"]
+const adjectives = ["abrupt", "acidic", "adorable", "adventurous", "aggressive", "agitated", "alert", "aloof", "amiable", "amused", "annoyed", "antsy", "anxious", "appalling", "appetizing", "apprehensive", "arrogant", "ashamed", "astonishing", "attractive", "average", "batty", "bewildered", "biting", "bitter", "bland", "blushing", "bored", "brave", "bright", "broad", "bulky", "burly", "charming", "cheeky", "cheerful", "chubby", "clean", "clear", "cloudy", "clueless", "clumsy", "colorful", "combative", "comfortable", "condemned", "condescending", "confused", "contemplative", "convincing", "convoluted", "cooperative", "corny", "costly", "courageous", "crabby", "creepy", "crooked", "cruel", "cumbersome", "curved", "cynical", "dangerous", "dashing", "decayed", "deceitful", "deep", "defeated", "defiant", "delicious", "delightful", "depraved", "depressed", "despicable", "determined", "dilapidated", "disgusted", "distinct", "distraught", "distressed", "disturbed", "dizzy", "drab", "drained", "dull", "eager", "ecstatic", "elated", "elegant", "emaciated", "embarrassed", "enchanting", "encouraging", "energetic", "enthusiastic", "envious", "exasperated", "excited", "exhilarated", "extensive", "exuberant", "fancy", "fantastic", "fierce", "filthy", "flat", "floppy", "fluttering", "foolish", "frantic", "fresh", "friendly", "frightened", "frothy", "frustrating", "funny", "fuzzy", "gaudy", "gentle", "ghastly", "giddy", "glamorous", "gleaming", "glorious", "gorgeous", "graceful", "greasy", "grieving", "gritty", "grotesque", "grubby", "grumpy", "handsome", "happy", "harebrained", "healthy", "helpful", "helpless", "high", "hollow", "homely", "horrific", "hungry", "hurt", "icy", "ideal", "impressionable", "intrigued", "irate", "irritable", "itchy", "jealous", "jittery", "jolly", "joyous", "juicy", "jumpy", "kind", "lackadaisical", "lazy", "lethal", "little", "lively", "livid", "lonely", "loose", "lovely", "lucky", "ludicrous", "macho", "magnificent", "maniacal", "melancholy", "melted", "mistaken", "misty", "moody", "mortified", "motionless", "muddy", "mysterious", "narrow", "nasty", "naughty", "nervous", "nonchalant", "nonsensical", "nutritious", "obedient", "oblivious", "obnoxious", "odd", "old-fashioned", "outrageous", "panicky", "perplexed", "petite", "petty", "plain", "pleasant", "poised", "pompous", "precious", "prickly", "proud", "pungent", "quaint", "quizzical", "ratty", "reassured", "relieved", "repulsive", "responsive", "ripe", "robust", "rotten", "rotund", "rough", "round", "salty", "sarcastic", "scant", "scary", "scattered", "selfish", "shaggy", "shaky", "shallow", "sharp", "shiny", "silky", "silly", "skinny", "slimy", "slippery", "smarmy", "smiling", "smoggy", "smooth", "smug", "soggy", "solid", "sore", "sour", "sparkling", "splendid", "spotless", "square", "stale", "steady", "steep", "sticky", "stormy", "stout", "straight", "strange", "strong", "stunning", "substantial", "successful", "succulent", "superficial", "superior", "swanky", "sweet", "tart", "tasty", "tender", "tense", "terrible", "testy", "thankful", "thick", "thoughtful", "thoughtless", "tight", "timely", "tricky", "trite", "troubled", "twitter", "pated", "uneven", "unsightly", "upset", "uptight", "vexed", "victorious", "virtuous", "vivacious", "vivid", "wacky", "weary", "whimsical", "whopping", "wicked", "witty", "wobbly", "wonderful", "worried", "yummy", "zany", "zealous", "zippy"]
 const nouns = ["pp", "mouth", "belly", "poggers", "simp", "brain", "head", "meme", "butt", "toe", "foot",
-                "cat", "dog", "clam", "rat", "poop", "dinkleberry", "heart", "nut", "cashew"]
+                "cat", "dog", "clam", "rat", "poop", "dinkleberry", "heart", "nut", "cashew", "gamer", "panda", 
+                "tea", "nest", "year", "bone", "streamer", "watcher", "criminal", "baby", "human", "bot"]
 
 
 /* Tier Arrays */
-const tier1 = ["no", "sad"]
+const tier1 = ["no", "sad", "mad", "balding", "malding", "hostage", "trash", "sadge", "smoge"]
 const tier2 = ["smallest", "tiniest", "littlest"]
 const tier3 = ["small", "tiny", "little", "miniature"]
-const tier4 = ["medium", "average", "moderate", "normal", "usual", "standard", "nutty"]
-const tier5 = ["big", "large", "huge", "hefty", "sizable", "fat", "considerable", "substantial", "heavy", "copious"]
-const tier6 = ["biggest", "largest", "hugest", "immense", "enormous", "colossal", "massive", "mammoth", "momentous", "vast", "tremendous"]
-const tier7 = ["best", "rare", "happy"]
-const tier8 = ["legendary", "rarest", "pak"]
+const tier4 = ["medium", "average", "moderate", "normal", "usual", "standard", "nutty", "blue"]
+const tier5 = ["cruel", "big", "large", "huge", "hefty", "sizable", "fat", "considerable", "substantial", "heavy", "copious", "illegal"]
+const tier6 = ["biggest", "largest", "hugest", "immense", "enormous", "colossal", "massive", "mammoth", "momentous", "vast", "tremendous", "disloyal"]
+const tier7 = ["best", "rare", "happy", "spicy", "milky", "scammazed"]
+const tier8 = ["legendary", "rarest", "pak", "nutty", "bone"]
 
 /* Probabilities */
 const tier1Threshold = .25
@@ -49,11 +51,11 @@ client.on("guildMemberAdd", (member) => {
 var PREFIX = "!"
 const CHRIS = "110128099361849344";
 const botSpamChannel = "738062969493258392"
-const safeRole = "humans"
+const safeRole = "flex"
 var probabilityMultiplier = 1
 var defaultProabilityMultiplier = 1
 
-client.on("message", (msg) => {
+client.on("message", async (msg) => {
     if(!msg.content.startsWith(PREFIX) || msg.channel.id != botSpamChannel)
         return
     let args = msg.content.substring(PREFIX.length).split(" ")
@@ -61,8 +63,8 @@ client.on("message", (msg) => {
         case "reroll":
         case "nickname":
             try{
-                msg.reply("You have been renamed to **" + nickname(msg.member) +"**")
-                msg.delete()
+                const ret = nickname(msg.member)
+                msg.reply("You have been renamed to **" + ret +"**")
             }
             catch (error){
                 console.log(error)
@@ -91,12 +93,16 @@ client.on("message", (msg) => {
                 msg.reply("That's illegal.")
                 return
             }
-            msg.guild.members.cache.forEach((member) => {
-                if(member.id != CHRIS){
+            var allMembers = (await msg.guild.members.fetch())
+            var counter = 0
+            const countMessage = (await msg.channel.send(getRenamedCount(counter)))
+            allMembers.forEach((member) => {
+                if(member.id != CHRIS && !member.roles.cache.has(safeRole)){
+                    counter++;
                     nickname(member)
                 }
+                countMessage.edit(getRenamedCount(counter))
             })
-            msg.reply("```Renaming " + msg.guild.memberCount + " users. Please wait.```")
             break
         case "chance":
             var chance = figureOutNameChance(msg.member)
@@ -151,6 +157,12 @@ client.on("message", (msg) => {
             break
     }
 })
+
+function getRenamedCount(count) 
+{
+    return "```Renamed " + count +" users```"
+}
+
 /**
  * Nicknames a member
  * @param {member} - The member object to be renamed
