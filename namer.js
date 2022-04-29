@@ -2,17 +2,17 @@ require('dotenv').config()
 const { Client, Intents }= require("discord.js");
 const { strict } = require("assert");
 const client = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS],
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.DIRECT_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
     partials: ["MESSAGE", "CHANNEL", "REACTION", "GUILD_MEMBERS"],
 })
 
 const adjectives = ["abrupt", "acidic", "adorable", "adventurous", "aggressive", "agitated", "alert", "aloof", "amiable", "amused", "annoyed", "antsy", "anxious", "appalling", "appetizing", "apprehensive", "arrogant", "ashamed", "astonishing", "attractive", "average", "batty", "bewildered", "biting", "bitter", "bland", "blushing", "bored", "brave", "bright", "broad", "bulky", "burly", "charming", "cheeky", "cheerful", "chubby", "clean", "clear", "cloudy", "clueless", "clumsy", "colorful", "combative", "comfortable", "condemned", "condescending", "confused", "contemplative", "convincing", "convoluted", "cooperative", "corny", "costly", "courageous", "crabby", "creepy", "crooked", "cruel", "cumbersome", "curved", "cynical", "dangerous", "dashing", "decayed", "deceitful", "deep", "defeated", "defiant", "delicious", "delightful", "depraved", "depressed", "despicable", "determined", "dilapidated", "disgusted", "distinct", "distraught", "distressed", "disturbed", "dizzy", "drab", "drained", "dull", "eager", "ecstatic", "elated", "elegant", "emaciated", "embarrassed", "enchanting", "encouraging", "energetic", "enthusiastic", "envious", "exasperated", "excited", "exhilarated", "extensive", "exuberant", "fancy", "fantastic", "fierce", "filthy", "flat", "floppy", "fluttering", "foolish", "frantic", "fresh", "friendly", "frightened", "frothy", "frustrating", "funny", "fuzzy", "gaudy", "gentle", "ghastly", "giddy", "glamorous", "gleaming", "glorious", "gorgeous", "graceful", "greasy", "grieving", "gritty", "grotesque", "grubby", "grumpy", "handsome", "happy", "harebrained", "healthy", "helpful", "helpless", "high", "hollow", "homely", "horrific", "hungry", "hurt", "icy", "ideal", "impressionable", "intrigued", "irate", "irritable", "itchy", "jealous", "jittery", "jolly", "joyous", "juicy", "jumpy", "kind", "lackadaisical", "lazy", "lethal", "little", "lively", "livid", "lonely", "loose", "lovely", "lucky", "ludicrous", "macho", "magnificent", "maniacal", "melancholy", "melted", "mistaken", "misty", "moody", "mortified", "motionless", "muddy", "mysterious", "narrow", "nasty", "naughty", "nervous", "nonchalant", "nonsensical", "nutritious", "obedient", "oblivious", "obnoxious", "odd", "old-fashioned", "outrageous", "panicky", "perplexed", "petite", "petty", "plain", "pleasant", "poised", "pompous", "precious", "prickly", "proud", "pungent", "quaint", "quizzical", "ratty", "reassured", "relieved", "repulsive", "responsive", "ripe", "robust", "rotten", "rotund", "rough", "round", "salty", "sarcastic", "scant", "scary", "scattered", "selfish", "shaggy", "shaky", "shallow", "sharp", "shiny", "silky", "silly", "skinny", "slimy", "slippery", "smarmy", "smiling", "smoggy", "smooth", "smug", "soggy", "solid", "sore", "sour", "sparkling", "splendid", "spotless", "square", "stale", "steady", "steep", "sticky", "stormy", "stout", "straight", "strange", "strong", "stunning", "substantial", "successful", "succulent", "superficial", "superior", "swanky", "sweet", "tart", "tasty", "tender", "tense", "terrible", "testy", "thankful", "thick", "thoughtful", "thoughtless", "tight", "timely", "tricky", "trite", "troubled", "twitter", "pated", "uneven", "unsightly", "upset", "uptight", "vexed", "victorious", "virtuous", "vivacious", "vivid", "wacky", "weary", "whimsical", "whopping", "wicked", "witty", "wobbly", "wonderful", "worried", "yummy", "zany", "zealous", "zippy"]
 const nouns = ["pp", "mouth", "belly", "poggers", "simp", "brain", "head", "meme", "butt", "toe", "foot",
                 "cat", "dog", "clam", "rat", "poop", "dinkleberry", "heart", "nut", "cashew", "gamer", "panda", 
-                "tea", "nest", "year", "bone", "streamer", "watcher", "criminal", "baby", "human", "bot"]
+                "tea", "nest", "year", "bone", "streamer", "watcher", "criminal", "baby", "human", "bot", "libtard"]
 
 
-/* Tier Arrays */
+/* Size Tier Arrays */
 const tier1 = ["no", "sad", "mad", "balding", "malding", "hostage", "trash", "sadge", "smoge"]
 const tier2 = ["smallest", "tiniest", "littlest"]
 const tier3 = ["small", "tiny", "little", "miniature"]
@@ -22,15 +22,19 @@ const tier6 = ["biggest", "largest", "hugest", "immense", "enormous", "colossal"
 const tier7 = ["best", "rare", "happy", "spicy", "milky", "scammazed"]
 const tier8 = ["legendary", "rarest", "pak", "nutty", "bone"]
 
+/* Reactions */
+const ACCEPT_EMOJI = "🟢";
+const DECLINE_EMOJI = "🔴";
+
 /* Probabilities */
-const tier1Threshold = .25
-const tier2Threshold = .5
-const tier3Threshold = .725
-const tier4Threshold = .905
-const tier5Threshold = .98
-const tier6Threshold = .995
-const tier7Threshold = .999
-const tier8Threshold = 1.0
+const tier1Threshold = .27 // 27%
+const tier2Threshold = .49 // 22%
+const tier3Threshold = .67 // 18%
+const tier4Threshold = .805 // 13.5%
+const tier5Threshold = .9 // 9.5%
+const tier6Threshold = .96 // 6%
+const tier7Threshold = .99 // 3%
+const tier8Threshold = 1.0 // 1%
 
 const chanceOfTier1 = tier1Threshold/tier1.length
 const chanceOfTier2 = (tier2Threshold-tier1Threshold)/tier2.length
@@ -52,6 +56,8 @@ var PREFIX = "!"
 const CHRIS = "110128099361849344";
 const botSpamChannel = "738062969493258392"
 const safeRole = "flex"
+const BOTID = "737152638180786267"
+
 var probabilityMultiplier = 1
 var defaultProabilityMultiplier = 1
 
@@ -127,6 +133,53 @@ client.on("message", async (msg) => {
                 console.log(error)
             }
             break;
+        case "trade":
+            try {
+                var memberId = args[1].replace(/[^0-9]/g,'')
+                var memberFound = msg.guild.members.cache.find((member) => member.id == memberId )
+                if (memberId == CHRIS || msg.author.id == CHRIS) {
+                    msg.reply("Chris is not allowed to trade nicknames :(")
+                    break;
+                }
+                if(memberFound != null) {
+                    msg.reply(formatTradeMessage(msg.author, memberFound)).then(async botMessage => {
+                        await botMessage.react(ACCEPT_EMOJI);
+                        await botMessage.react(DECLINE_EMOJI);
+                        let filter = (reaction, user) => {
+                            return (
+                              [ACCEPT_EMOJI, DECLINE_EMOJI].includes(reaction.emoji.name) &&
+                              user.id != BOTID && user.id == memberFound.id
+                            );
+                          };
+                        let collector = botMessage.createReactionCollector({ filter, max: 1, time: 15000 })
+
+                        collector.on('collect', (reaction, user) => {
+                            if (reaction.emoji.name == ACCEPT_EMOJI) {
+                                try {
+                                    var tempName = msg.member.displayName
+                                    msg.member.setNickname(memberFound.displayName)
+                                    memberFound.setNickname(tempName)
+                                    msg.channel.send("<@" + memberFound.user.id +"> has successfully accepted the trade.")
+                                } catch (exception) {
+                                    console.log(exception)
+                                }
+                            } else if (reaction.emoji.name == DECLINE_EMOJI) {
+                                msg.channel.send("<@" + memberFound.user.id +"> has declined the trade.")
+                            }
+                            collector.stop()
+                        })
+                        collector.on('end', (collected) => {
+                            console.log("Trade Request timed out")
+                            if (collected.size < 1) {
+                                botMessage.reply.send("Trade request has timed out.")
+                            }
+                        })
+                    })
+                }
+            } catch(error) {
+                console.log(error)
+            }
+            break;
         case "setProbability":
             if (msg.author.id != CHRIS){
                 msg.reply("That's illegal.")
@@ -158,6 +211,10 @@ client.on("message", async (msg) => {
     }
 })
 
+function formatTradeMessage(sender, receiver) {
+    return "<@" + sender.id +"> would like to trade their name with <@"+receiver.id+">. React " + ACCEPT_EMOJI + " to accept the trade or " + DECLINE_EMOJI + "to decline."
+}
+
 function getRenamedCount(count) 
 {
     return "```Renamed " + count +" users```"
@@ -168,13 +225,13 @@ function getRenamedCount(count)
  * @param {member} - The member object to be renamed
  */
 function nickname(member){
-    var newName = getASize() + " " + getANoun() + " " + getAnAdjective() + " " + getANoun()
+    var newName = getAWeightedAdjective() + " " + getANoun() + " " + getAnAdjective() + " " + getANoun()
     if (newName.length >= 32) {
         newName = nickname(member)
     }
     try{
         member.setNickname(newName)
-        console.log(member.displayName + " was renamed.")
+        console.log(member.user.tag + " was renamed to " + member.displayName)
     } catch (error) {
         console.log(error)
     }
@@ -183,7 +240,6 @@ function nickname(member){
 
 function figureOutNameChance(member) {
         var authorNameParts = member.displayName.split(" ")
-        console.log(authorNameParts)
         var currentChance = 1.00
         for (var i=0;i<authorNameParts.length;i++) {
             var chanceOfWord = chanceOfGettingWord(authorNameParts[i])
@@ -235,29 +291,38 @@ function chanceOfGettingWord(word) {
 }
 
 
-function getASize(){
+function getAWeightedAdjective(){
     var chanceRoll = Math.random() * probabilityMultiplier
+    console.log(chanceRoll)
     if (chanceRoll < tier1Threshold) {
+        console.log("TIER 1")
         return chooseRandom(tier1)
     }
     if (chanceRoll < tier2Threshold) {
+        console.log("TIER 2")
         return chooseRandom(tier2)
     }
     if (chanceRoll < tier3Threshold) {
+        console.log("TIER 3")
         return chooseRandom(tier3)
     }
     if (chanceRoll < tier4Threshold) {
+        console.log("TIER 4")
         return chooseRandom(tier4)
     }
     if (chanceRoll < tier5Threshold) {
+        console.log("TIER 5")
         return chooseRandom(tier5)
     }
     if (chanceRoll < tier6Threshold) {
+        console.log("TIER 6")
         return chooseRandom(tier6)
     }
     if (chanceRoll < tier7Threshold) {
+        console.log("TIER 7")
         return chooseRandom(tier7)
     } else {
+        console.log("TIER 8")
         return chooseRandom(tier8)
     }
 }
