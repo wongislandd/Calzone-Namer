@@ -171,7 +171,7 @@ client.on("message", async (msg) => {
                         collector.on('end', (collected) => {
                             console.log("Trade Request timed out")
                             if (collected.size < 1) {
-                                botMessage.reply.send("Trade request has timed out.")
+                                botMessage.reply("Trade request has timed out.")
                             }
                         })
                     })
