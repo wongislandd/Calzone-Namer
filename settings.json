@@ -1,0 +1,33 @@
+{
+	"words": {
+		"nouns": ["pp", "mouth", "belly", "poggers", "simp", "brain", "head", "meme", "butt", "toe", "foot",
+			"cat", "dog", "clam", "rat", "poop", "dinkleberry", "heart", "nut", "cashew", "gamer", "panda",
+			"tea", "nest", "year", "bone", "streamer", "watcher", "criminal", "baby", "human", "bot", "libtard"
+		],
+		"adjectives": ["abrupt", "acidic", "adorable", "adventurous", "aggressive", "agitated", "alert", "aloof", "amiable", "amused", "annoyed", "antsy", "anxious", "appalling", "appetizing", "apprehensive", "arrogant", "ashamed", "astonishing", "attractive", "average", "batty", "bewildered", "biting", "bitter", "bland", "blushing", "bored", "brave", "bright", "broad", "bulky", "burly", "charming", "cheeky", "cheerful", "chubby", "clean", "clear", "cloudy", "clueless", "clumsy", "colorful", "combative", "comfortable", "condemned", "condescending", "confused", "contemplative", "convincing", "convoluted", "cooperative", "corny", "costly", "courageous", "crabby", "creepy", "crooked", "cruel", "cumbersome", "curved", "cynical", "dangerous", "dashing", "decayed", "deceitful", "deep", "defeated", "defiant", "delicious", "delightful", "depraved", "depressed", "despicable", "determined", "dilapidated", "disgusted", "distinct", "distraught", "distressed", "disturbed", "dizzy", "drab", "drained", "dull", "eager", "ecstatic", "elated", "elegant", "emaciated", "embarrassed", "enchanting", "encouraging", "energetic", "enthusiastic", "envious", "exasperated", "excited", "exhilarated", "extensive", "exuberant", "fancy", "fantastic", "fierce", "filthy", "flat", "floppy", "fluttering", "foolish", "frantic", "fresh", "friendly", "frightened", "frothy", "frustrating", "funny", "fuzzy", "gaudy", "gentle", "ghastly", "giddy", "glamorous", "gleaming", "glorious", "gorgeous", "graceful", "greasy", "grieving", "gritty", "grotesque", "grubby", "grumpy", "handsome", "happy", "harebrained", "healthy", "helpful", "helpless", "high", "hollow", "homely", "horrific", "hungry", "hurt", "icy", "ideal", "impressionable", "intrigued", "irate", "irritable", "itchy", "jealous", "jittery", "jolly", "joyous", "juicy", "jumpy", "kind", "lackadaisical", "lazy", "lethal", "little", "lively", "livid", "lonely", "loose", "lovely", "lucky", "ludicrous", "macho", "magnificent", "maniacal", "melancholy", "melted", "mistaken", "misty", "moody", "mortified", "motionless", "muddy", "mysterious", "narrow", "nasty", "naughty", "nervous", "nonchalant", "nonsensical", "nutritious", "obedient", "oblivious", "obnoxious", "odd", "old-fashioned", "outrageous", "panicky", "perplexed", "petite", "petty", "plain", "pleasant", "poised", "pompous", "precious", "prickly", "proud", "pungent", "quaint", "quizzical", "ratty", "reassured", "relieved", "repulsive", "responsive", "ripe", "robust", "rotten", "rotund", "rough", "round", "salty", "sarcastic", "scant", "scary", "scattered", "selfish", "shaggy", "shaky", "shallow", "sharp", "shiny", "silky", "silly", "skinny", "slimy", "slippery", "smarmy", "smiling", "smoggy", "smooth", "smug", "soggy", "solid", "sore", "sour", "sparkling", "splendid", "spotless", "square", "stale", "steady", "steep", "sticky", "stormy", "stout", "straight", "strange", "strong", "stunning", "substantial", "successful", "succulent", "superficial", "superior", "swanky", "sweet", "tart", "tasty", "tender", "tense", "terrible", "testy", "thankful", "thick", "thoughtful", "thoughtless", "tight", "timely", "tricky", "trite", "troubled", "twitter", "pated", "uneven", "unsightly", "upset", "uptight", "vexed", "victorious", "virtuous", "vivacious", "vivid", "wacky", "weary", "whimsical", "whopping", "wicked", "witty", "wobbly", "wonderful", "worried", "yummy", "zany", "zealous", "zippy"],
+		"weightedWords": {
+			"tier1": ["no", "sad", "mad", "balding", "malding", "hostage", "trash", "sadge", "smoge"],
+			"tier2": ["smallest", "tiniest", "littlest"],
+			"tier3": ["small", "tiny", "little", "miniature"],
+			"tier4": ["medium", "average", "moderate", "normal", "usual", "standard", "nutty", "blue"],
+			"tier5": ["cruel", "big", "large", "huge", "hefty", "sizable", "fat", "considerable", "substantial", "heavy", "copious", "illegal"],
+			"tier6": ["biggest", "largest", "hugest", "immense", "enormous", "colossal", "massive", "mammoth", "momentous", "vast", "tremendous", "disloyal"],
+			"tier7": ["best", "rare", "happy", "spicy", "milky", "scammazed"],
+			"tier8": ["legendary", "rarest", "pak", "nutty", "bone"]
+		}
+	},
+	"acceptEmoji": "🟢",
+	"declineEmoji": "🔴",
+	"tierThreshholds": {
+		"tier1" : 0.27,
+		"tier2" : 0.49,
+		"tier3" : 0.67,
+		"tier4" : 0.805,
+		"tier5" : 0.9,
+		"tier6" : 0.96,
+		"tier7" : 0.99,
+		"tier8" : 1.0
+	},
+	"tradeTimer": 15000,
+	"namerChannelId" : "738062969493258392"
+}
