@@ -31,7 +31,7 @@ const forceRollCommand = new SlashCommandBuilder()
 
 const rerollServerCommand = new SlashCommandBuilder()
     .setName('serverroll')
-    .setDescription("Reroll everyone in the server")
+    .setDescription("Reroll everyone in the server. Admin only.")
     .addRoleOption(option => option.setName('saferole').setDescription('Define a safe role'))
 
 const commands = [
@@ -224,25 +224,25 @@ function getNameChanceString(member) {
  */
  function chanceOfGettingWord(word) {
     if (settings.words.weightedWords.tier1.includes(word)) {
-        return 1 / settings.words.weightedWords.tier1.length
+        return (1 / settings.words.weightedWords.tier1.length) * settings.tierThreshholds.tier1
     } else if (settings.words.weightedWords.tier2.includes(word)) {
-        return 1 / settings.words.weightedWords.tier2.length
+        return (1 / settings.words.weightedWords.tier2.length) * settings.tierThreshholds.tier2
     } else if (settings.words.weightedWords.tier3.includes(word)) {
-        return 1 / settings.words.weightedWords.tier3.length
+        return (1 / settings.words.weightedWords.tier3.length) * settings.tierThreshholds.tier3
     } else if (settings.words.weightedWords.tier4.includes(word)) {
-        return 1 / settings.words.weightedWords.tier4.length
+        return (1 / settings.words.weightedWords.tier4.length) * settings.tierThreshholds.tier4
     }
     else if (settings.words.weightedWords.tier5.includes(word)) {
-        return 1 / settings.words.weightedWords.tier5.length
+        return (1 / settings.words.weightedWords.tier5.length) * settings.tierThreshholds.tier5
     }
     else if (settings.words.weightedWords.tier6.includes(word)) {
-        return 1 / settings.words.weightedWords.tier6.length
+        return (1 / settings.words.weightedWords.tier6.length) * settings.tierThreshholds.tier6
     }
     else if (settings.words.weightedWords.tier7.includes(word)) {
-        return 1 / settings.words.weightedWords.tier7.length
+        return (1 / settings.words.weightedWords.tier7.length) * settings.tierThreshholds.tier7
     }
     else if (settings.words.weightedWords.tier8.includes(word)) {
-        return 1 / settings.words.weightedWords.tier8.length
+        return (1 / settings.words.weightedWords.tier8.length) * settings.tierThreshholds.tier8
     } else if (adjectives.includes(word)) {
         return 1 / adjectives.length
     } else if (nouns.includes(word)) {
@@ -295,7 +295,7 @@ function getRecoveredNameMessage(member, originalName) {
 }
 
 function getNameHoldTimedOutMessage(member, originalName) {
-    return tagById(member.id) + " has been not recovered " + codeText(originalName)
+    return tagById(member.id) + codeText(originalName) + " has not been recovered."
 }
 
 function getRenamedMessage(newName) {
