@@ -226,23 +226,23 @@ function getNameChanceString(member) {
     if (settings.words.weightedWords.tier1.includes(word)) {
         return (1 / settings.words.weightedWords.tier1.length) * settings.tierThreshholds.tier1
     } else if (settings.words.weightedWords.tier2.includes(word)) {
-        return (1 / settings.words.weightedWords.tier2.length) * settings.tierThreshholds.tier2
+        return (1 / settings.words.weightedWords.tier2.length) * (settings.tierThreshholds.tier2 - settings.tierThreshholds.tier1)
     } else if (settings.words.weightedWords.tier3.includes(word)) {
-        return (1 / settings.words.weightedWords.tier3.length) * settings.tierThreshholds.tier3
+        return (1 / settings.words.weightedWords.tier3.length) * (settings.tierThreshholds.tier3 - settings.tierThreshholds.tier2)
     } else if (settings.words.weightedWords.tier4.includes(word)) {
-        return (1 / settings.words.weightedWords.tier4.length) * settings.tierThreshholds.tier4
+        return (1 / settings.words.weightedWords.tier4.length) * (settings.tierThreshholds.tier4 - settings.tierThreshholds.tier3)
     }
     else if (settings.words.weightedWords.tier5.includes(word)) {
-        return (1 / settings.words.weightedWords.tier5.length) * settings.tierThreshholds.tier5
+        return (1 / settings.words.weightedWords.tier5.length) * (settings.tierThreshholds.tier5 - settings.tierThreshholds.tier4)
     }
     else if (settings.words.weightedWords.tier6.includes(word)) {
-        return (1 / settings.words.weightedWords.tier6.length) * settings.tierThreshholds.tier6
+        return (1 / settings.words.weightedWords.tier6.length) * (settings.tierThreshholds.tier6 - settings.tierThreshholds.tier5)
     }
     else if (settings.words.weightedWords.tier7.includes(word)) {
-        return (1 / settings.words.weightedWords.tier7.length) * settings.tierThreshholds.tier7
+        return (1 / settings.words.weightedWords.tier7.length) * (settings.tierThreshholds.tier7 - settings.tierThreshholds.tier6)
     }
     else if (settings.words.weightedWords.tier8.includes(word)) {
-        return (1 / settings.words.weightedWords.tier8.length) * settings.tierThreshholds.tier8
+        return (1 / settings.words.weightedWords.tier8.length) * (settings.tierThreshholds.tier8 - settings.tierThreshholds.tier7)
     } else if (adjectives.includes(word)) {
         return 1 / adjectives.length
     } else if (nouns.includes(word)) {
