@@ -11,6 +11,9 @@ const nouns = settings.words.nouns
 const adjectives = settings.words.adjectives
 const weightedWords = settings.words.weightedWords
 
+const commandWhitelist = ['forceroll']
+const githubRepo = "https://github.com/wongislandd/Calzone-Namer"
+
 const tradeCommand = new SlashCommandBuilder()
     .setName('trade')
     .setDescription("Trade nicknames with another user!")
@@ -41,7 +44,8 @@ const commands = [
     rerollServerCommand,
     tradeCommand,
     forceRollCommand,
-    new SlashCommandBuilder().setName('ping').setDescription("Check my status")
+    new SlashCommandBuilder().setName('ping').setDescription("Check my status"),
+    new SlashCommandBuilder().setName('code').setDescription("See the code that makes me tick!"),
 ].map(command => command.toJSON())
 
 
@@ -66,7 +70,7 @@ client.on('interactionCreate', async interaction => {
 
     const { commandName, member, channel } = interaction
 
-    if (channel.id != settings.namerChannelId) {
+    if (channel.id != settings.namerChannelId && !commandWhitelist.includes(commandName)) {
         interaction.reply({ content: 'Use the reroll channel for this command!', ephemeral: true })
         return;
     }
@@ -105,6 +109,9 @@ client.on('interactionCreate', async interaction => {
             }
             var safeRole = interaction.options.getRole('saferole')
             rerollServer(interaction, safeRole)
+            break;
+        case 'code':
+            interaction.reply(getGithubRepoString())
             break;
     }
 })
@@ -195,6 +202,10 @@ function getMemberIsSafeMessage(member) {
 function getRenamedCount(count) 
 {
     return codeText("Renamed " + count +" users")
+}
+
+function getGithubRepoString() {
+    return "Find my code at: " + githubRepo
 }
 
 function getNameChanceString(member) {
