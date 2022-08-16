@@ -14,7 +14,8 @@
 			"tier6": ["biggest", "largest", "hugest", "immense", "enormous", "colossal", "massive", "mammoth", "momentous", "vast", "tremendous", "disloyal"],
 			"tier7": ["best", "rare", "happy", "spicy", "milky", "scammazed"],
 			"tier8": ["legendary", "rarest", "pak", "nutty", "bone"]
-		}
+		},
+		"emojis": ["🐼", "😳", "🐀", "🐇", "🦥", "🐦", "🐳", "🦠"]
 	},
 	"acceptEmoji": "🟢",
 	"declineEmoji": "🔴",

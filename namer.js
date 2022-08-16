@@ -10,6 +10,7 @@ const settings = require('./settings.json')
 const nouns = settings.words.nouns
 const adjectives = settings.words.adjectives
 const weightedWords = settings.words.weightedWords
+const emojis = settings.words.emojis
 
 const commandWhitelist = ['forceroll']
 const githubRepo = "https://github.com/wongislandd/Calzone-Namer"
@@ -45,7 +46,7 @@ const commands = [
     tradeCommand,
     forceRollCommand,
     new SlashCommandBuilder().setName('ping').setDescription("Check my status"),
-    new SlashCommandBuilder().setName('code').setDescription("See the code that makes me tick!"),
+    new SlashCommandBuilder().setName('code').setDescription("See the code that makes me tick!")
 ].map(command => command.toJSON())
 
 
@@ -335,7 +336,7 @@ function tagById(id) {
  */
  function nickname(member){
     var oldName = member.displayName
-    var newName = getAWeightedWord() + " " + chooseRandom(nouns)+ " " + chooseRandom(adjectives) + " " + chooseRandom(nouns)
+    var newName = getAWeightedWord() + " " + chooseRandom(nouns)+ " " + chooseRandom(adjectives) + " " + chooseRandom(nouns) + " " + chooseRandom(emojis)
     if (newName.length >= 32) {
         newName = nickname(member)
     }
